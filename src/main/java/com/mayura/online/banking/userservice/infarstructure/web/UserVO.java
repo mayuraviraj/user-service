@@ -1,4 +1,12 @@
 package com.mayura.online.banking.userservice.infarstructure.web;
 
-public class UserVO {
+import lombok.Builder;
+
+@Builder
+public record UserVO(Long id,
+                     String extId,
+                     String firstName,
+                     String lastName,
+                     String email,
+                     AddressVO address) {
 }
