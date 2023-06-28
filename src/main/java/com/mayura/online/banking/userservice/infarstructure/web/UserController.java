@@ -22,16 +22,16 @@ public class UserController {
     }
 
     @GetMapping("/{userId}")
-    public ResponseEntity<UserVO> getUser(@PathVariable(name = "userId") final Long userId) {
+    public ResponseEntity<UserVO> getUser(@PathVariable(name = "userId") final String userId) {
         log.info("Finding user with id {}", userId);
         return new ResponseEntity<>(UserConverter.toUserValueObject(userService.getUserById(userId)),
                 HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<Long> createUser(@RequestBody UserVO user){
-        log.info("Creating new user with id {}", user.extId());
-        Long id = userService.create(UserConverter.toUserDomainObject(user));
+    public ResponseEntity<String> createUser(@RequestBody UserVO user){
+        log.info("Creating new user with id {}", user);
+        String id = userService.create(UserConverter.toUserDomainObject(user));
         return new ResponseEntity<>(id, HttpStatus.CREATED);
     }
 }

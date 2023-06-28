@@ -15,12 +15,12 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public User getUserById(Long id) {
+    public User getUserById(String id) {
         Optional<User> userById = userRepository.findById(id);
         return userById.orElse(null);
     }
 
-    public Long create(User user){
+    public String create(User user){
         return userRepository.save(user).getId();
     }
 }

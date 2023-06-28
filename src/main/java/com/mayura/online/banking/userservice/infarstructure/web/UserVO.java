@@ -3,8 +3,7 @@ package com.mayura.online.banking.userservice.infarstructure.web;
 import lombok.Builder;
 
 @Builder
-public record UserVO(Long id,
-                     String extId,
+public record UserVO(String id,
                      String firstName,
                      String lastName,
                      String email,

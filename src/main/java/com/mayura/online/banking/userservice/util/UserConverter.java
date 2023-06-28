@@ -13,7 +13,6 @@ public class UserConverter {
         } else {
             return UserVO.builder()
                     .id(domainUser.getId())
-                    .extId(domainUser.getExtId())
                     .email(domainUser.getEmail())
                     .firstName(domainUser.getFirstName())
                     .lastName(domainUser.getLastName())
@@ -41,7 +40,6 @@ public class UserConverter {
             return null;
         } else {
             return User.builder()
-                    .extId(user.extId())
                     .firstName(user.firstName())
                     .lastName(user.lastName())
                     .email(user.email())

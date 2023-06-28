@@ -7,7 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.ResponseEntity;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -39,10 +43,22 @@ public class RestControllerTest {
                         + stringSubstitutor.replace(GET_USER_BY_ID_PATH),
                 UserVO.class);
         assertThat(forObject).isNotNull();
-        assertThat(forObject.extId()).isEqualTo(userId);
+        assertThat(forObject.id()).isEqualTo(userId);
     }
 
-    private String createNewUser(UserVO user) {
-        return "TESTE";
+    private String createNewUser(UserVO user) throws URISyntaxException {
+        URI uri = new URI(String.format(BASE_PATH, port) + CREATE_NEW_USER);
+        UserVO userVO = UserVO.builder()
+                .id("test-id-x")
+                .firstName("test user")
+                .lastName("last name")
+                .email("test@email.com")
+                .build();
+
+        HttpEntity<UserVO> request = new HttpEntity<>(userVO);
+
+        ResponseEntity<String> result = this.restTemplate.postForEntity(uri, request, String.class);
+        System.out.println(result);
+        return result.getBody();
     }
 }
